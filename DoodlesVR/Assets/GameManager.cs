@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public MMF_Player SuccessParticleFeedback;
     public MMF_Player WrongParticleFeedback;
     public RaycastPainter RaycastPainter;
+    public List<GameObject> WrongEffects;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,7 +44,7 @@ public class GameManager : MonoBehaviour
         this.ImageCl.Classify();
         PredictedClass predictedClass = this.ClassifierController.GetPredictedClass();
 
-        if (predictedClass.classId == this.ClassToDraw)
+        if (predictedClass.classId == this.ClassToDraw && predictedClass.percentage > 0.005)
         {
             this.OnCorrectDraw();
         } else
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     public void Skip()
     {
-        this.RandomizeClassToDraw();
+        this.OnSkip();
     }
 
     public void OnCorrectDraw()
@@ -67,10 +69,12 @@ public class GameManager : MonoBehaviour
     public void OnWrongDraw()
     {
         this.WrongParticleFeedback?.PlayFeedbacks();
+        Instantiate(this.WrongEffects[Random.Range(0, this.WrongEffects.Count)], new Vector3(2.39f, 4.59f, 4.14f), Quaternion.identity);
     }
 
     public void OnSkip()
     {
+        this.RandomizeClassToDraw();
         this.RaycastPainter.ResetCanvas();
     }
 }
