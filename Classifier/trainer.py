@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 # Load categories
-CATEGORIES = ["ambulance", "bee", "cactus", "donut", "sun", "car", "camera", "crown", "laptop", "knife", "rollerskates", "star"]
+CATEGORIES = ["ambulance", "bee", "cactus", "tree", "sun", "mug", "camera", "crown", "laptop", "knife", "rollerskates", "fish"]
 DATA_DIR = "quickdraw_data"
 SAMPLES_PER_CLASS = 5000
 

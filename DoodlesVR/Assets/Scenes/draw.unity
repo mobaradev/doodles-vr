@@ -1313,20 +1313,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputTexture: {fileID: 0}
-  modelAsset: {fileID: 5022602860645237092, guid: 3b9128d6c1cbc7b4cb6412e8eb5af87f, type: 3}
+  modelAsset: {fileID: 5022602860645237092, guid: c8bcc37c76c273a45abc0b6c62107d37, type: 3}
   classes:
   - ambulance
   - bee
   - cactus
-  - donut
+  - tree
   - sun
-  - car
+  - mug
   - camera
   - crown
   - laptop
   - knife
   - rollerskates
-  - star
+  - fish
   results: []
   highestId: 0
   highestValue: 0
