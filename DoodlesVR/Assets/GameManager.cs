@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using static ClassifierController;
@@ -12,6 +13,10 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI ClassToDrawText;
     public TextMeshProUGUI PointsText;
+
+    public MMF_Player SuccessParticleFeedback;
+    public MMF_Player WrongParticleFeedback;
+    public RaycastPainter RaycastPainter;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,7 +28,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         this.ClassToDrawText.SetText("Draw " + this.ImageCl.classes[this.ClassToDraw]);
-        this.PointsText.SetText("Points " + this.Points);
+        this.PointsText.SetText(this.Points + " points");
     }
 
     public void RandomizeClassToDraw()
@@ -39,8 +44,10 @@ public class GameManager : MonoBehaviour
 
         if (predictedClass.classId == this.ClassToDraw)
         {
-            this.RandomizeClassToDraw();
-            this.Points += 1;
+            this.OnCorrectDraw();
+        } else
+        {
+            this.OnWrongDraw();
         }
     }
 
@@ -51,16 +58,19 @@ public class GameManager : MonoBehaviour
 
     public void OnCorrectDraw()
     {
-
+        this.SuccessParticleFeedback?.PlayFeedbacks();
+        this.Points += 1;
+        this.RandomizeClassToDraw();
+        this.RaycastPainter.ResetCanvas();
     }
 
     public void OnWrongDraw()
     {
-
+        this.WrongParticleFeedback?.PlayFeedbacks();
     }
 
     public void OnSkip()
     {
-
+        this.RaycastPainter.ResetCanvas();
     }
 }
