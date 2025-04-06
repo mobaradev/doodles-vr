@@ -45,7 +45,7 @@ public class RaycastPainter : MonoBehaviour
     {
         this.HandleOutput();
 
-        if (!this.AllowPainting) return;
+        
 
         GameObject paintSurface = GameObject.FindGameObjectWithTag("PaintableSurface");
         //PlanePainter planePainter = paintSurface.GetComponent<PlanePainter>();
@@ -59,6 +59,8 @@ public class RaycastPainter : MonoBehaviour
             Debug.Log("Raycast");
             if (hit.collider.CompareTag("PaintableSurface"))
             {
+                DrawRayInBuild(transform.position, transform.forward, rayLength, Color.green);
+                if (!this.AllowPainting) return;
                 // Convert UV coords to pixel coords
                 Vector2 uv = hit.textureCoord;
                 int x = (int)(uv.x * runtimeTexture.width);
@@ -67,6 +69,21 @@ public class RaycastPainter : MonoBehaviour
                 PaintAt(x, y);
             }
         }
+    }
+
+    public void DrawRayInBuild(Vector3 start, Vector3 direction, float length, Color color)
+    {
+        GameObject lineObj = new GameObject("DebugRay");
+        LineRenderer lr = lineObj.AddComponent<LineRenderer>();
+        lr.startWidth = 0.05f;
+        lr.endWidth = 0.05f;
+        lr.material = new Material(Shader.Find("Sprites/Default"));
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.positionCount = 2;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, start + direction.normalized * length);
+        GameObject.Destroy(lineObj, 0.02f); // auto destroy
     }
 
     private void PaintAt(int x, int y)

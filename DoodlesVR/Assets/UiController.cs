@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UiController : MonoBehaviour
 {
+    public GameManager GameManager;
     public RaycastPainter RaycastPainter;
     public ImageCl ImageCl;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,6 +24,11 @@ public class UiController : MonoBehaviour
 
     public void Submit()
     {
-        this.ImageCl.Classify();
+        this.GameManager.Submit();
+    }
+
+    public void Skip()
+    {
+        this.GameManager.Skip();
     }
 }

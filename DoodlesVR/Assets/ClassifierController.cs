@@ -9,6 +9,7 @@ public class ClassifierController : MonoBehaviour
 
     public class PredictedClass
     {
+        public int classId;
         public string className = "";
         public float percentage = 0;
     }
@@ -37,6 +38,7 @@ public class ClassifierController : MonoBehaviour
         PredictedClass predictedClass = new PredictedClass();
         if (this.ImageCl.inputTexture)
         {
+            predictedClass.classId = this.ImageCl.highestId;
             predictedClass.percentage = this.ImageCl.highestValue;
             predictedClass.className = this.ImageCl.classes[this.ImageCl.highestId];
         }
