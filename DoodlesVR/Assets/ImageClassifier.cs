@@ -1,10 +1,13 @@
 using UnityEngine;
 using Unity.Sentis;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class ImageCl : MonoBehaviour
 {
     public Texture2D inputTexture;
     public ModelAsset modelAsset;
+    public List<string> classes;
 
     Model runtimeModel;
     Worker worker;
@@ -17,7 +20,7 @@ public class ImageCl : MonoBehaviour
     void Start()
     {
         //this.Classify();
-        InvokeRepeating(nameof(this.Classify), 1f, 1f);
+        //InvokeRepeating(nameof(this.Classify), 1f, 5f);
     }
 
     private void Update()

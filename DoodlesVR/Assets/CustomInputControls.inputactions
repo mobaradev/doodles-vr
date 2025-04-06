@@ -1,0 +1,51 @@
+{
+    "name": "CustomInputControls",
+    "maps": [
+        {
+            "name": "CustomControls",
+            "id": "cfc8697f-4829-436e-acef-dfabf3aacd56",
+            "actions": [
+                {
+                    "name": "Paint",
+                    "type": "Button",
+                    "id": "945fd96b-377b-4abf-89c8-94814f036158",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "255b52a9-c48b-4ba5-a38a-462a91b9a08f",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Paint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7321558-6759-4a75-aec3-8658924cd802",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Paint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "CustomControls",
+            "bindingGroup": "CustomControls",
+            "devices": []
+        }
+    ]
+}

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RaycastPainter : MonoBehaviour
 {
+    public bool AllowPainting;
     [Header("Raycast Settings")]
     public float rayLength = 0.1f; // How far the ray should go
     public LayerMask paintableLayer;
@@ -34,6 +35,7 @@ public class RaycastPainter : MonoBehaviour
         runtimeTexture = new Texture2D(sourceTexture.width, sourceTexture.height, TextureFormat.RGBA32, false);
         Graphics.CopyTexture(sourceTexture, runtimeTexture);
         runtimeTexture.Apply();
+        this.ResetCanvas();
 
         // Apply the texture to the paintable material
         targetRenderer.material.mainTexture = runtimeTexture;
@@ -41,6 +43,10 @@ public class RaycastPainter : MonoBehaviour
 
     private void Update()
     {
+        this.HandleOutput();
+
+        if (!this.AllowPainting) return;
+
         GameObject paintSurface = GameObject.FindGameObjectWithTag("PaintableSurface");
         //PlanePainter planePainter = paintSurface.GetComponent<PlanePainter>();
         //this.sourceTexture = planePainter.runtimeTexture;
@@ -61,8 +67,6 @@ public class RaycastPainter : MonoBehaviour
                 PaintAt(x, y);
             }
         }
-
-        this.HandleOutput();
     }
 
     private void PaintAt(int x, int y)
@@ -100,6 +104,19 @@ public class RaycastPainter : MonoBehaviour
         //                              100f); // The pivot and pixels per unit
         //this.sUI.sprite = sprite;
         FindObjectOfType<ImageCl>().inputTexture = resizedTexture;
+    }
+
+    public void ResetCanvas()
+    {
+        for (int py = 0; py < 256; py++)
+        {
+            for (int px = 0; px < 256; px++)
+            {
+                runtimeTexture.SetPixel(px, py, Color.black);
+            }
+        }
+
+        runtimeTexture.Apply();
     }
 
 }
